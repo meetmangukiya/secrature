@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Welcome to Secrature!</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+  </head>
+  <body>
+    <div>
+      <textarea id="encrypted" disabled></textarea><br>
+      <input id="pass" placeholder="Enter the passphrase: "
+                       onkeyup="decrypt()"><br>
+      <textarea id="decrypted" disabled></textarea>
+    </div>
+    <script>
+      const encrypted = window.location.href.split('#').pop();
+      document.getElementById('encrypted').value = encrypted;
+
+      const decrypt = () => {
+        const pass = document.getElementById('pass').value;
+        console.log(`decrypting using ${pass}`);
+        try{
+          const decrypted = CryptoJS.AES.decrypt(encrypted, pass).toString(CryptoJS.enc.Utf8);
+          console.log(`decrypted: ${decrypted}`);
+          document.getElementById('decrypted').value = (decrypted != '') ? decrypted : '!!Incorrect!!';
+        } catch(ex) {
+          document.getElementById('decrypted').value = '!!Incorrect!!';
+        }
+      };
+    </script>
+  </body>
+</html>

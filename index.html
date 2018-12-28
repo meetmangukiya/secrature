@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Welcome to the secrature!</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+  </head>
+  <body>
+    <div>
+      <textarea id="data" placeholder="Enter your message here..."></textarea><br>
+      <input id="pass" onchange="encrypt()" placeholder="Enter your password here..."><br>
+      <button onclick="encrypt()">Encrypt</button>
+    </div>
+    <p id="link"></p>
+    <script>
+      const encrypt = () => {
+        const data = document.getElementById('data').value;
+        const pass = document.getElementById('pass').value;
+        const encrypted = CryptoJS.AES.encrypt(data, pass).toString();
+        console.log("afd: ", encrypted)
+        const url = `${window.location.href}/message#${encrypted}`;
+        console.log(url);
+        document.getElementById('link').innerHTML = `Your message: <a
+        href="${url}">${url}</a>`
+      }
+    </script>
+  </body>
+</html>

@@ -3,13 +3,24 @@
   <head>
     <title>Welcome to Secrature!</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
-    <div>
-      <textarea id="encrypted" disabled></textarea><br>
-      <input id="pass" placeholder="Enter the passphrase: "
-                       onkeyup="decrypt()"><br>
-      <textarea id="decrypted" disabled></textarea>
+    <div id="container">
+      <div id="encryption">
+        <textarea id="encrypted" disabled></textarea><br>
+        <input id="pass" placeholder="Enter the passphrase: "
+                         onkeyup="decrypt()"><br>
+      </div>
+      <div id="arrow">
+        <object>
+          <?xml version="1.0" encoding="utf-8"?>
+  <svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1600 960q0 54-37 91l-651 651q-39 37-91 37-51 0-90-37l-75-75q-38-38-38-91t38-91l293-293h-704q-52 0-84.5-37.5t-32.5-90.5v-128q0-53 32.5-90.5t84.5-37.5h704l-293-294q-38-36-38-90t38-90l75-75q38-38 90-38 53 0 91 38l651 651q37 35 37 90z"/></svg>
+        </object>
+      </div>
+      <div id="decryption">
+        <textarea id="decrypted" disabled></textarea>
+      </div>
     </div>
     <script>
       const encrypted = window.location.href.split('#').pop();
@@ -27,5 +38,44 @@
         }
       };
     </script>
+    <style>
+      html, body {
+        height: 100%;
+      }
+
+      #container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        height: 100%;
+      }
+
+      #encryption, #decryption, #arrow {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      #arrow > object > svg {
+        height: 3em;
+      }
+
+      textarea {
+        width: 50em;
+        height: 20em;
+      }
+
+      input {
+        height: 1em;
+      }
+
+      textarea, input {
+        padding-top: 0.25em;
+        padding-bottom: 0.25em;
+      }
+
+      textarea:focus, input:focus {
+      }
+    </style>
   </body>
 </html>

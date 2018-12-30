@@ -2,15 +2,29 @@
 <html>
   <head>
     <title>Welcome to the secrature!</title>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
-    <div>
-      <textarea id="data" placeholder="Enter your message here..."></textarea><br>
-      <input id="pass" onchange="encrypt()" placeholder="Enter your password here..."><br>
-      <button onclick="encrypt()">Encrypt</button>
+    <div id='outer-container'>
+      <div id="inner-container">
+        <div id='about'>
+          <span style="font-size: 3em">Secrature</span><br>
+          <span style="font-size: 1.5em">Send encrypted messages as links.</span>
+          <p>
+            None of your messages are stored on any server. The encrypted message is encoded in the URL, which is
+  then decrypted with client side javascipt. Secrature uses AES symmetric-key
+  algorithm for encryption and decryption.
+          </p>
+        </div>
+        <div id='encryption'>
+          <textarea id="data" placeholder="Enter your message here..."></textarea><br>
+          <input id="pass" onchange="encrypt()" placeholder="Enter your password here..."><br>
+          <button onclick="encrypt()">Encrypt</button>
+          <p id="link"></p>
+        </div>
+      </div>
     </div>
-    <p id="link"></p>
     <script>
       const encrypt = () => {
         const data = document.getElementById('data').value;
@@ -19,9 +33,44 @@
         console.log("afd: ", encrypted)
         const url = `${window.location.href}/message#${encrypted}`;
         console.log(url);
-        document.getElementById('link').innerHTML = `Your message: <a
-        href="${url}">${url}</a>`
+        document.getElementById('link').innerHTML = `Your message is encrypted
+        and available <a
+        href="${url}">here</a>!`
       }
     </script>
+    <style>
+      html, body {
+        height: 100%;
+      }
+
+      #outer-container {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        height: 100%;
+      }
+
+      #inner-container {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+      }
+
+      #about {
+        width: 30em;
+        text-align: right;
+        margin-right: 1em;
+      }
+
+      #encryption {
+        display: flex;
+        flex-direction: column;
+        width: 20em;
+      }
+
+      textarea {
+        height: 20em;
+      }
+    </style>
   </body>
 </html>
